@@ -42,7 +42,8 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          IMAGE=ghcr.io/${{ github.repository_owner }}/simple-java-maven-app
+          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE=ghcr.io/$OWNER/simple-java-maven-app
           docker build -t $IMAGE:${{ steps.version.outputs.version }} .
           docker push $IMAGE:${{ steps.version.outputs.version }}
 
